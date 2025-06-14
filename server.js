@@ -10,7 +10,7 @@ const app = express();
 
 // CORS - allow frontend to connect
 app.use(cors({
-  origin: true, // Allow all origins in development
+   origin: ['http://localhost:3001', 'https://3-space.vercel.app/'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
