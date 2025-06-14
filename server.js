@@ -9,19 +9,17 @@ dotenv.config();
 const app = express();
 
 // CORS - allow frontend to connect
-pp.use(cors({
-  origin: [
-    'http://localhost:3001',
-    'http://127.0.0.1:3001',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'https://threespace.vercel.app',
-    process.env.CLIENT_URL
-  ].filter(Boolean),
+app.use(cors({
+  origin: true, // Allow all origins in development
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  maxAge: 600 // Cache preflight request for 10 minutes
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 
