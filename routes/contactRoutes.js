@@ -1,5 +1,5 @@
-import express from 'express';
-import Contact from '../models/Contact.js';
+const express = require('express');
+const Contact = require('../models/Contact');
 
 const router = express.Router();
 
@@ -30,4 +30,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
