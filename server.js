@@ -16,6 +16,7 @@ app.use(cors({
     'http://localhost:3001',
     'http://localhost:3002',
     'https://3-space.vercel.app',
+    'https://3-space.vercel.app/',
     'https://threespacebackend.onrender.com',
     'https://www.3spacecorp.com',
     'https://3spacecorp.com',

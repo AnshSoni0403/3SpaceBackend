@@ -30,4 +30,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+// DELETE - Delete a contact message by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: 'Invalid contact ID' });
+    }
+
+    const deletedContact = await Contact.findByIdAndDelete(id);
+    
+    if (!deletedContact) {
+      return res.status(404).json({ success: false, message: 'Contact not found' });
+    }
+    
+    res.json({ success: true, message: 'Contact deleted successfully', data: deletedContact });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 module.exports = router;
