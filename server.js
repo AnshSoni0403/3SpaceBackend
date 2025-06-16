@@ -19,7 +19,8 @@ app.use(cors({
     'https://threespacebackend.onrender.com',
     'https://www.3spacecorp.com',
     'https://3spacecorp.com',
-    'https://3-space-admin.vercel.app'
+    'https://3-space-admin.vercel.app',
+    'https://3-space-admin.vercel.app/'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
