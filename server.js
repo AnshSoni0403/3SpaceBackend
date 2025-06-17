@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 const contactRoutes = require('./routes/contactRoutes');
+const careerRoutes = require('./routes/careerRoutes');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -57,6 +58,13 @@ connectDB();
 
 // Routes
 app.use('/api/contact', contactRoutes);
+app.use('/api/careers', careerRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
