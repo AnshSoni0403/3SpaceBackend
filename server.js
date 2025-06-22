@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const contactRoutes = require('./routes/contactRoutes');
 const careerRoutes = require('./routes/careerRoutes');
+const blogRoutes = require('./routes/blogRoutes');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -59,6 +60,7 @@ connectDB();
 // Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/careers', careerRoutes);
+app.use('/api/blogs', blogRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
