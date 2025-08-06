@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+
 const contactRoutes = require('./routes/contactRoutes');
 const careerRoutes = require('./routes/careerRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -36,9 +38,13 @@ app.use(cors({
 // Handle preflight requests
 app.options('*', cors());
 
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded images statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -57,8 +63,10 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
+
 app.use('/api/contact', contactRoutes);
 app.use('/api/careers', careerRoutes);
+app.use('/api/products', productRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
