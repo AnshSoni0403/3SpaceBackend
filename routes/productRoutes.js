@@ -1,3 +1,9 @@
+
+const express = require('express');
+const Product = require('../models/Product');
+const upload = require('../middleware/upload');
+const router = express.Router();
+
 // PUT /api/products/:id - Edit a product (with optional image upload)
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
@@ -32,11 +38,6 @@ router.delete('/:id', async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 });
-
-const express = require('express');
-const Product = require('../models/Product');
-const upload = require('../middleware/upload');
-const router = express.Router();
 
 
 // POST /api/products - Add a new product (Admin, with image upload)
