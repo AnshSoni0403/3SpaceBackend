@@ -13,6 +13,10 @@ const contactSchema = new mongoose.Schema({
   message: {
     type: String,
     maxlength: [500, 'Message is too long']
+  },
+  viewed: {
+    type: Boolean,
+    default: false
   }
 }, { timestamps: true });
 

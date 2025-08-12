@@ -31,6 +31,40 @@ router.get('/', async (req, res) => {
   }
 });
 
+// PUT - Update viewed status of a contact message
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { viewed } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: 'Invalid contact ID' });
+    }
+
+    if (typeof viewed !== 'boolean') {
+      return res.status(400).json({ success: false, message: 'Viewed status must be a boolean' });
+    }
+
+    const updatedContact = await Contact.findByIdAndUpdate(
+      id,
+      { viewed },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedContact) {
+      return res.status(404).json({ success: false, message: 'Contact not found' });
+    }
+
+    res.json({ 
+      success: true, 
+      message: 'Contact updated successfully',
+      data: updatedContact 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // DELETE - Delete a contact message by ID
 router.delete('/:id', async (req, res) => {
   try {
